@@ -11,7 +11,7 @@ function App() {
                 console.log(size);
                 if (size) {
                     try {
-                        const result = await invoke("set_window_size", { width: size[0], height: size[1] });
+                        const result = await invoke("set_window_size", { width: size[0], height: 10 });
                         if (result == true) {
                             console.log("Successfully Set the Window Size");
                         }
@@ -27,11 +27,8 @@ function App() {
     fetchAndSetWindowSize();
     }, []);
 
-
-
-
   return (
-    <div className="select-none flex flex-col items-center justify-center bg-zinc-900 rounded-[1.5rem] text-white h-screen w-screen border border-white/20">
+    <div className="select-none flex flex-col items-center justify-center bg-zinc-900 rounded-[1rem] text-white text-xs h-screen w-screen border border-white/20">
       Rusty Bar 💀 
     </div>
   );

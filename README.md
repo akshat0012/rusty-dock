@@ -1,7 +1,22 @@
-# Tauri + React
+BOOL SystemParametersInfoA(
+  [in]      UINT  uiAction,
+  [in]      UINT  uiParam,
+  [in, out] PVOID pvParam,
+  [in]      UINT  fWinIni
+);
 
-This template should help get you started developing with Tauri and React in Vite.
 
-## Recommended IDE Setup
+// Rust Code
+        
+    // Create a Structure
+    struct pvParam {
+        Left: ,
+        Right: ,
+        Top: ,
+        Bottom: ,
+    }
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+    unsafe {
+        SystemParametersInfoA(SPI_SETWORKAREA, 0, &work_area as *const _ as *mut _, 0);
+                              // uiAction
+    }
