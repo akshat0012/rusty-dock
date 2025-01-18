@@ -3055,6 +3055,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "rusty-dock"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "sysinfo",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-opener",
+ "windows-sys 0.59.0",
+]
+
+[[package]]
 name = "ryu"
 version = "1.0.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4479,19 +4492,6 @@ dependencies = [
  "thiserror 1.0.69",
  "windows",
  "windows-core 0.58.0",
-]
-
-[[package]]
-name = "widget-test"
-version = "0.1.0"
-dependencies = [
- "serde",
- "serde_json",
- "sysinfo",
- "tauri",
- "tauri-build",
- "tauri-plugin-opener",
- "windows-sys 0.59.0",
 ]
 
 [[package]]

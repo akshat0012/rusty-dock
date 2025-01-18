@@ -27,8 +27,7 @@
         "decorations": false,
         "transparent": true,
         "fullscreen": false,
-        "resizable": false,
-        "shadow": false 
+        "shadow": false
       }
     ],
     "security": {
@@ -47,3 +46,4 @@
     ]
   }
 }
+
