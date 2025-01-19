@@ -1,23 +1,21 @@
 # Rusty Dock
-Rusty Dock is a customizable and lightweight desktop dock application built using **React**, **Rust**, and **Tauri**. It provides an efficient interface for managing app shortcuts, widgets, and system information like battery and network status, all in one place.
+Rusty Dock is a customizable and lightweight desktop dock application built using **React**, **Rust**, and **Tauri**. It provides (not yet) an efficient interface for managing app shortcuts, widgets, and system information like battery and network status, all in one place.
 
 > "As they say, if you don’t like a software, build your own. so I made my own :) "
 
 ## Features
 ### Core Features
-- [ ] App Shortcuts: Add, remove, and rearrange shortcuts
+- [ ] App Shortcuts: Add, remove shortcuts
 - [ ] Drag-and-Drop Support
 - [ ] System Info Widget (CPU, memory, disk usage)
 - [ ] Battery Status Widget
 - [ ] Network Status Widget
 
 ### Customization Options
-- [ ] Hot-reload configuration changes
 - [ ] Themes and colors
-- [ ] Transparency control
+- [ ] Transparency and Border control
 - [ ] Adjustable icon sizes
 - [x] ~~Dock positioning (top/bottom)~~
-- [ ] Smooth animations
 
 ### Configuration
 - [x] Uses config.json for storing user preferences
@@ -25,7 +23,7 @@ Rusty Dock is a customizable and lightweight desktop dock application built usin
    - [ ] Theme settings
    - [ ] Custom shortcuts
    - [ ] Widget configurations
-- [ ] Hot-reload configuration changes
+- [x] ~~Hot-reload configuration changes~~
 
 ## Technologies Used
 [![Tech Stack](https://skillicons.dev/icons?i=rust,react,tailwind,tauri)](https://v2.tauri.app/)
@@ -55,16 +53,22 @@ Rusty Dock is a customizable and lightweight desktop dock application built usin
 
 ## Usage
 
-## config.json Reference
+### Configuration File
+
+The configuration file `config.json` should be located at:
+
+#### Absolute Path (for Windows)
+`C:\ProgramData\widget-test\config.json`
+
 
 | Key             | Possible Values                                                                |
 | ----------------- | ----------------------- |
 | "height" | int |
-| "top-offset" | int |
-| "left-offset" | int |
-| "right-offset" | int |
-| "bottom-offset" | int |
-| "border-radius" | int |
+| "top_offset" | int |
+| "left_offset" | int |
+| "right_offset" | int |
+| "bottom_offset" | int |
+| "border_radius" | int |
 | "theme" | "dark" or "light" |
 | "position" | "top" or "bottom" |
 
@@ -72,5 +76,3 @@ Rusty Dock is a customizable and lightweight desktop dock application built usin
 1. Launch Rusty Dock after Downloading or Building.
 2. Configure the configuration file (config.json)
 3. Enjoy 🎉
-
-

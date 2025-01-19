@@ -23,6 +23,7 @@ sysinfo = "0.29"
 tauri = { version = "2", features = [] }
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
+notify = "8.0.0"
 
 [dependencies.windows-sys]
 version = "0.59"

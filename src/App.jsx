@@ -5,9 +5,9 @@ import "./App.css"
 function App() {
 
     useEffect(() => {
-        async function talk_to_winAPI() {
+        async function init_backend() {
             try {
-                const result = await invoke("talk_to_win_api", { height: 60 });
+                const result = await invoke("init");
                 if (result == true) {
                     console.log("Successfully Set the Window Size");
                 }
@@ -16,7 +16,7 @@ function App() {
                 console.log("There is some error in setting the Window size", err);
             }
         }
-        talk_to_winAPI();
+        init_backend();
     }, []);
 
   return (
