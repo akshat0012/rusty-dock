@@ -13,14 +13,13 @@ Rusty Dock is a customizable and lightweight desktop dock application built usin
 
 ### Customization Options
 - [ ] Themes and colors
-- [ ] Transparency and Border control
+- [x] Transparency and Border control
 - [ ] Adjustable icon sizes
 - [x] ~~Dock positioning (top/bottom)~~
 
 ### Configuration
 - [x] Uses config.json for storing user preferences
    - [x] ~~Dock position~~
-   - [ ] Theme settings
    - [ ] Custom shortcuts
    - [ ] Widget configurations
 - [x] ~~Hot-reload configuration changes~~
@@ -58,19 +57,39 @@ Rusty Dock is a customizable and lightweight desktop dock application built usin
 The configuration file `config.json` should be located at:
 
 #### Absolute Path (for Windows)
-`C:\ProgramData\widget-test\config.json`
+`C:\ProgramData\rusty-dock\config.json`
+
+## Dock Settings
+
+| **Key**           | **Description**                                |
+|--------------------|-----------------------------------------------|
+| **`height`**       | Height of the dock in `px`.                  |
+| **`bg_color`**     | Background color of the dock #RRGGBBAA.       |
+| **`position`**     | Position of the dock (`"top"` or `"bottom"`). |
+| **`top_offset`**   | Space between the dock and the top of the screen in `px`. |
+| **`left_padding`**  | Space between the dock and the left side of the screen in `px`. |
+| **`border_radius`** | Radius of dock corners in `px`.             |
+| **`right_padding`** | Space between the dock and the right side of the screen in `px`. |
+| **`bottom_padding`**| Space between the dock and the bottom of the screen in `px`. |
 
 
-| Key             | Possible Values                                                                |
-| ----------------- | ----------------------- |
-| "height" | int |
-| "top_offset" | int |
-| "left_offset" | int |
-| "right_offset" | int |
-| "bottom_offset" | int |
-| "border_radius" | int |
-| "theme" | "dark" or "light" |
-| "position" | "top" or "bottom" |
+## Example Configuration
+
+Below is an example configuration for the dock settings:
+
+```json
+{
+  "dock_settings": {
+    "height": 50,
+    "top_padding": 3,
+    "position": "top",
+    "left_padding": 5,
+    "border_radius": 16,
+    "right_padding": 0,
+    "bottom_padding": 5,
+    "bg_color": "18181870"
+  }
+}
 
 
 1. Launch Rusty Dock after Downloading or Building.

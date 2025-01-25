@@ -20,14 +20,9 @@ use windows_sys::Win32::UI::WindowsAndMessaging::{
     GetSystemMetrics
 };
 
-use super::config::read_config;
+use super::config::Config;
 
-pub fn talk_to_win_api(window: &Window) -> bool {
-    // read the config file
-    match read_config(None) {
-        Ok(current_config) => {
-            // println!("SUCCESS:: read_config(None)");
-            // println!("Theme is -> {}", current_config.theme);
+pub fn talk_to_win_api(window: &Window, current_config: &Config) -> bool {
             let (screen_height, screen_width) = unsafe {
                 (GetSystemMetrics(SM_CYSCREEN), GetSystemMetrics(SM_CXSCREEN))
             };
@@ -54,30 +49,30 @@ pub fn talk_to_win_api(window: &Window) -> bool {
             let mut cy = 0;
 
 
-            if current_config.position == "top" {
-                top    = current_config.top_offset;
-                bottom = current_config.height + current_config.top_offset + current_config.bottom_offset;
-                right  = screen_width          - current_config.right_offset;
-                left   = current_config.left_offset;
+            if current_config.dock_settings.position == "top" {
+                top    = current_config.dock_settings.top_padding;
+                bottom = current_config.dock_settings.height + current_config.dock_settings.top_padding + current_config.dock_settings.bottom_padding;
+                right  = screen_width          - current_config.dock_settings.right_padding;
+                left   = current_config.dock_settings.left_padding;
                 u_edge = ABE_TOP;
                 
                 x = left;
                 y = top;
                 cx = right - left;
-                cy = bottom - top - current_config.bottom_offset; 
+                cy = bottom - top - current_config.dock_settings.bottom_padding; 
             }
 
-            else if current_config.position == "bottom" {
-                bottom = screen_height - current_config.bottom_offset;
-                top    = bottom - current_config.height - current_config.top_offset;
-                right  = screen_width - current_config.right_offset;
-                left   = current_config.left_offset;
+            else if current_config.dock_settings.position == "bottom" {
+                bottom = screen_height - current_config.dock_settings.bottom_padding;
+                top    = bottom - current_config.dock_settings.height - current_config.dock_settings.top_padding;
+                right  = screen_width - current_config.dock_settings.right_padding;
+                left   = current_config.dock_settings.left_padding;
                 u_edge = ABE_BOTTOM;
 
                 x = left;
-                y = top + current_config.top_offset;
+                y = top + current_config.dock_settings.top_padding;
                 cx = right - left;
-                cy = bottom - top - current_config.top_offset; 
+                cy = bottom - top - current_config.dock_settings.top_padding;
             }
 
 
@@ -96,8 +91,6 @@ pub fn talk_to_win_api(window: &Window) -> bool {
                 lParam: 0
             };
                 
-
-
             unsafe {
                 SHAppBarMessage(ABM_NEW, &mut appbar_data);
                 SHAppBarMessage(ABM_SETPOS, &mut appbar_data);
@@ -112,10 +105,5 @@ pub fn talk_to_win_api(window: &Window) -> bool {
                     SWP_NOACTIVATE
                 );
             }
-        }
-        Err(error_string_from_read_config) => {
-            println!("ERROR::read_config()\n{}", error_string_from_read_config);
-        }
-    }
     true
 }

@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "widget-test",
+  "productName": "rusty-dock",
   "version": "0.1.0",
-  "identifier": "com.widget-test.app",
+  "identifier": "com.rusty-dock.app",
 
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -11,10 +11,11 @@
     "frontendDist": "../dist"
   },
   "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "label": "bar",
-        "title": "widget-test",
+        "title": "rusty-dock",
         "width": 800,
         "height": 600,
         "x": 0,
@@ -46,4 +47,3 @@
     ]
   }
 }
-

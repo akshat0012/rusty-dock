@@ -1,12 +1,11 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Capability for the main window",
-  "windows": ["main"],
+  "description": "Capability for the bar window",
+  "windows": ["bar"],
   "permissions": [
     "core:default",
     "opener:default",
-    "core:window:default", 
-    "core:window:allow-start-dragging"
+    "core:window:default"
   ]
 }
