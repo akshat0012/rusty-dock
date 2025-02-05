@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import "./App.css"
 
 import { useSelector, useDispatch } from 'react-redux'
-import { set_color, set_radius } from './slices/dock_settings'
+import { set_error, remove_error } from './slices/error_slice'
+import { set_color, set_radius } from './slices/dock_settings_slice'
+
+import DockBox from './components/dock_box'
+import ErrorPrompt from './components/error_prompt'
+
 
 function App() {
     const dispatch = useDispatch();
@@ -14,7 +19,6 @@ function App() {
 
     useEffect(() => {
         let unlisten;
-        
         async function init_backend() {
             try {
                 const init_result = await invoke("init");
@@ -33,7 +37,6 @@ function App() {
             }
         }
         init_backend();
-        
     }, []);
 
   return (
@@ -41,12 +44,13 @@ function App() {
         backgroundColor: settings.bg_color,
         borderRadius: `${settings.border_radius}px`,
     }}
-      className={`select-none flex items-center justify-center rounded-[16px] text-white text-xl h-screen w-screen border border-white/20 overflow-hidden`}>
+      className={`relative select-none flex items-center gap-6 justify-center rounded-[16px] text-white text-xl h-screen w-screen border border-white/20 overflow-hidden`}>
+      <DockBox/>
         <div style={{
             backgroundColor: "#ed1b76",
             borderRadius: `${settings.border_radius}px`,
         }}
-          className={`p-[2px] flex flex-row gap-2 text-md`}>
+          className={`p-[1px] flex flex-row gap-2 text-md`}>
             {manojis.map((emoji, index) => (
                 <div key={index}>
                     {emoji}

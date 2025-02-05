@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import dockSettingsReducer from './slices/dock_settings'
+import errorReducer from './slices/error_slice'
+import dockSettingsReducer from './slices/dock_settings_slice'
 
 export default configureStore({
   reducer: {
-    dock_settings: dockSettingsReducer 
+    is_error: errorReducer,
+    dock_settings: dockSettingsReducer
   }
 })

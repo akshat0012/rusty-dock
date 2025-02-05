@@ -11,7 +11,7 @@ pub fn hot_reload(app: AppHandle, window: Window, current_config: &mut MyConfig,
     let config_path = Path::new(path);
     let (tx, rx) = std::sync::mpsc::channel();
 
-    // Use MyConfig::default() instead of Config::default()
+    // using MyConfig::default() instead of Config::default()
     let mut watcher = RecommendedWatcher::new(tx, Config::default())?;
     watcher.watch(config_path.as_ref(), RecursiveMode::Recursive)?;
 

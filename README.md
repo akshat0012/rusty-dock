@@ -6,10 +6,11 @@ Rusty Dock is a customizable and lightweight desktop dock application built usin
 ## Features
 ### Core Features
 - [ ] App Shortcuts: Add, remove shortcuts
-- [ ] Drag-and-Drop Support
+- [x] Drag-and-Drop Box for Quick File Access: DockBox 
 - [ ] System Info Widget (CPU, memory, disk usage)
 - [ ] Battery Status Widget
 - [ ] Network Status Widget
+- [ ] Prompt the user with an error message if the configuration file is incorrect.
 
 ### Customization Options
 - [ ] Themes and colors
