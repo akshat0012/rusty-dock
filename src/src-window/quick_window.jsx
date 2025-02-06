@@ -1,7 +1,6 @@
-import "../App.css"
 import { useSelector, useDispatch } from 'react-redux'
 
-function App() {
+function QuickWindow() {
     let settings = useSelector(state => state.dock_settings);
     return (
         <div 
@@ -15,4 +14,4 @@ function App() {
     )
 }
 
-export default App;
+export default QuickWindow;

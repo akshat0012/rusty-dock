@@ -1,4 +1,5 @@
 use std::thread;
+use tauri::LogicalSize;
 use tauri::{ Window, AppHandle, Listener };
 
 mod utils;
@@ -28,9 +29,9 @@ async fn init(app: AppHandle, window: Window) -> bool {
     match tauri::WebviewWindowBuilder::new (
         &app,
         "quick_window",
-        tauri::WebviewUrl::App("../../src/src-window/index.html".into())
+        tauri::WebviewUrl::App("index.html#/quick-window".into())
     )
-    .focused(true)
+    .focused(false)
     .shadow(false)
     .visible(false)
     .resizable(false)
@@ -40,11 +41,13 @@ async fn init(app: AppHandle, window: Window) -> bool {
     .decorations(false)
     .skip_taskbar(true)
     .always_on_top(true)
-    .visible_on_all_workspaces(true)
     .build() {
         Ok(window) => {
             quick_window = window;
             app.listen("toggle_quick_menu", move |event| {
+                let _ = quick_window.set_focus();
+                let _ = quick_window.set_size(LogicalSize::new(900.0, 100.0));
+                let _ = quick_window.set_position(tauri::LogicalPosition::new(200.0, 200.0));
                 toggle_quick_window(&quick_window, event.payload());
             });
             app.listen("quick_menu_data", move |event| {
