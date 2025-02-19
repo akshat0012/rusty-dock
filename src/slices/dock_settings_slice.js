@@ -8,9 +8,11 @@ export const dockSettingsSlice = createSlice({
   },
   reducers: {
     set_radius: ( state, action ) => {
-       state.border_radius = action.payload; 
+        console.log("Called set_radius");
+        state.border_radius = action.payload; 
     },
     set_color: ( state, action ) => {
+        console.log("Called set_color");
         state.bg_color = action.payload;
     }
   }

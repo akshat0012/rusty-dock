@@ -2,7 +2,6 @@ use tauri::{ AppHandle, Window };
 use std::path::Path;
 use notify::{Config, RecommendedWatcher, RecursiveMode, Watcher};
 
-use super::read_config::read_config;
 use super::config::Config as MyConfig;
 use super::update_frontend::update_frontend;
 use super::talk_to_win_api::talk_to_win_api;
@@ -19,26 +18,16 @@ pub fn hot_reload(app: AppHandle, window: Window, current_config: &mut MyConfig,
         match res {
             Ok(event) => {
                 if event.kind.is_modify() {
-                    // Pass an immutable reference to the functions that need it
-                    match read_config(None) {
-                        Ok(new_config) => {
-                            *current_config = new_config;
-                        }
-                        Err(e) => {
-                            // send an event to frontend to check the config.json file
-                            println!("ERORR:: hot_reload()::read_config()\n{}", e);
-                        }
-                    }
-
-                    match update_frontend(&app, &current_config) {
-                        Ok(_) => {
+                    match update_frontend(&app, true, None, None) {
+                        Ok(updated_config) => {
                             // println!("SUCCESS:: hot_reload()::update_frontend()");
+                            talk_to_win_api(&window, &updated_config);
                         }
                         Err(e) => {
                             println!("{}", e);
                         }
                     }
-                    talk_to_win_api(&window, &current_config);
+                    
                 }
             }
             Err(error) => eprintln!("Error: {error:?}"),

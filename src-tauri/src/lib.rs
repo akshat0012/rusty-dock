@@ -1,6 +1,6 @@
 use std::thread;
 use tauri::LogicalSize;
-use tauri::{ Window, AppHandle, Listener };
+use tauri::{ Window, AppHandle, Listener, Emitter };
 
 mod utils;
 use utils::config::Config;
@@ -14,13 +14,13 @@ use utils::toggle_quick_window::toggle_quick_window;
 #[tauri::command]
 async fn init(app: AppHandle, window: Window) -> bool {
 
-    let mut current_config: Config = match read_config(None) {
+    let mut config: Config = match read_config(None) {
         Ok(config) => {
             // println!("SUCCESS:: init()::read_config()");
             config
         }
         Err(e) => {
-            println!("Err read_config\n{}", e);
+            println!("ERROR:: init() -> read_config\n{}", e);
             return false;
         }
     };
@@ -44,14 +44,20 @@ async fn init(app: AppHandle, window: Window) -> bool {
     .build() {
         Ok(window) => {
             quick_window = window;
+
+            let app_clone = app.clone();
+
             app.listen("toggle_quick_menu", move |event| {
                 let _ = quick_window.set_focus();
-                let _ = quick_window.set_size(LogicalSize::new(900.0, 100.0));
-                let _ = quick_window.set_position(tauri::LogicalPosition::new(200.0, 200.0));
-                toggle_quick_window(&quick_window, event.payload());
+                let _ = quick_window.set_size(LogicalSize::new(400.0, 200.0));
+                let _ = quick_window.set_position(tauri::LogicalPosition::new(400.0, 820.0));
+                toggle_quick_window(&app_clone, &quick_window, event.payload());
             });
+
+            let app_clone = app.clone();
             app.listen("quick_menu_data", move |event| {
                 println!("Data -> {}", event.payload());
+                let _ = app_clone.emit_to("quick_window", "quick_window_data", event.payload());
             });
         }
         Err(e) => {
@@ -61,16 +67,14 @@ async fn init(app: AppHandle, window: Window) -> bool {
 
 
 
-    talk_to_win_api(&window, &current_config);
+    talk_to_win_api(&window, &config);
 
     let app_clone = app.clone();
-    let current_config_clone = current_config.clone();
+    let config_clone = config.clone();
 
     app.listen("frontend_ready", move |event| {
-        // println!("Data -> {}", event.payload());
-
         if event.payload() == "\"frontend_ready\"" {
-            match update_frontend(&app_clone, &current_config_clone) {
+            match update_frontend(&app_clone, false, Some(&config_clone), None) {
                 Ok(_) => {
                     // println!("SUCCESS:: init()::update_frontend()");
                 }
@@ -82,10 +86,8 @@ async fn init(app: AppHandle, window: Window) -> bool {
 
     });
 
-
-
     let _handle = thread::spawn(move || {
-        hot_reload(app, window, &mut current_config, "C:/ProgramData/rusty-dock/config.json")
+        hot_reload(app, window, &mut config, "C:/ProgramData/rusty-dock/config.json")
     });
     true
 }

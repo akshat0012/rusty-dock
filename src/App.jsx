@@ -24,6 +24,7 @@ function App() {
                 const init_result = await invoke("init");
                 if (init_result == true) {
                     unlisten = await listen("send_config_data", (event) => {
+                        console.log("This is bar");
                         console.log(event.payload);
                         dispatch(set_color(event.payload.dock_settings.bg_color))
                         dispatch(set_radius(event.payload.dock_settings.border_radius))

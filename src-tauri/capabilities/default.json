@@ -1,8 +1,8 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Capability for the bar window",
-  "windows": ["bar"],
+  "description": "Capability for the bar and quick_window",
+  "windows": ["bar", "quick_window"],
   "permissions": [
     "core:default",
     "opener:default",

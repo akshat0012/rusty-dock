@@ -5,3 +5,11 @@
 body {
     overflow: hidden;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari */
+}
+.no-scrollbar {
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
